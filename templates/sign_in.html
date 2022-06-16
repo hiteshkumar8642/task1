@@ -6,9 +6,6 @@
 <div class="center1">
 	<div class="box">
 		<form method="post">
-		<div class="imgcontainer">
-			<img src="{%static '/images/hero_1.jpg' %}" alt="Avatar" class="avatar">
-		</div>
 		{% csrf_token %}
 		<div class="container">
 			<label for="uname"><b>Username</b></label>
@@ -18,14 +15,9 @@
 			<input type="password" placeholder="Enter Password" name="password" required>
 
 			<button type="submit">Login</button>
-			<label>
-			<input type="checkbox" checked="checked" name="remember"> Remember me
-			</label>
 		</div>
 
-		<div class="container" style="background-color:#f1f1f1">
-			<button type="button" class="cancelbtn">Cancel</button>
-		</div>
+
 		</form>
 		<center><h4>Do not have login <a href="{% url 'sign_up' %}"> Sign up</a></h4></center>
 	</div>
