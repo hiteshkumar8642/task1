@@ -1,0 +1,89 @@
+{% load static  %}
+<link rel="stylesheet" href="{%static 'sign_up.css' %}">
+</center>
+<div class="center1">
+	<div class="box" >
+
+		<ul class="messages" font>
+			<h1 style="color:red;">
+				{% for message in messages %}
+				<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+				{% endfor %}
+			</h1>
+		</ul>
+		<form method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			<div class="container">
+				<label for="uname"><b>Username</b></label>
+				<input type="text" placeholder="Enter Username" name="uname" required>
+				<label for="fname"><b>First Name</b></label>
+				<input type="text" placeholder="Enter First name" name="fname" required>
+				<label for="lane"><b> Last Name</b></label>
+				<input type="text"  placeholder="Enter Last name" name="lname" required>
+				<label for="email"><b>Email</b></label>
+				<input type="email" placeholder="Enter Email" name="email" required><br>
+				<label for="Lane"><b>Lane</b></label>
+				<input type="text"  placeholder="Enter Lane no" name="lane" required>
+				<label for="city"><b>city</b></label>
+				<input type="text" placeholder="Enter city" name="city" required>
+				<label for="state"><b>State</b></label>
+				<select name="state" id="state" class="form-control">
+					<option value="Andhra Pradesh">Andhra Pradesh</option>
+					<option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+					<option value="Arunachal Pradesh">Arunachal Pradesh</option>
+					<option value="Assam">Assam</option>
+					<option value="Bihar">Bihar</option>
+					<option value="Chandigarh">Chandigarh</option>
+					<option value="Chhattisgarh">Chhattisgarh</option>
+					<option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+					<option value="Daman and Diu">Daman and Diu</option>
+					<option value="Delhi">Delhi</option>
+					<option value="Lakshadweep">Lakshadweep</option>
+					<option value="Puducherry">Puducherry</option>
+					<option value="Goa">Goa</option>
+					<option value="Gujarat">Gujarat</option>
+					<option value="Haryana">Haryana</option>
+					<option value="Himachal Pradesh">Himachal Pradesh</option>
+					<option value="Jammu and Kashmir">Jammu and Kashmir</option>
+					<option value="Jharkhand">Jharkhand</option>
+					<option value="Karnataka">Karnataka</option>
+					<option value="Kerala">Kerala</option>
+					<option value="Madhya Pradesh">Madhya Pradesh</option>
+					<option value="Maharashtra">Maharashtra</option>
+					<option value="Manipur">Manipur</option>
+					<option value="Meghalaya">Meghalaya</option>
+					<option value="Mizoram">Mizoram</option>
+					<option value="Nagaland">Nagaland</option>
+					<option value="Odisha">Odisha</option>
+					<option value="Punjab">Punjab</option>
+					<option value="Rajasthan">Rajasthan</option>
+					<option value="Sikkim">Sikkim</option>
+					<option value="Tamil Nadu">Tamil Nadu</option>
+					<option value="Telangana">Telangana</option>
+					<option value="Tripura">Tripura</option>
+					<option value="Uttar Pradesh">Uttar Pradesh</option>
+					<option value="Uttarakhand">Uttarakhand</option>
+					<option value="West Bengal">West Bengal</option>
+				</select><br>
+				<label for="pin"><b>Pincode</b></label>
+				<input type="text" placeholder="Enter Pin code" name="pin" required>
+				<label for="upload"><b>Image</b></label>
+				<input type="file" name="upload" required>
+
+
+				<br><br><label for="password1"><b>Password</b></label>
+				<input type="password" placeholder="Enter Password" name="password1" required>
+
+				<label for="password2"><b>Confirm</b></label>
+				<input type="password" placeholder="Enter Password" name="password2" required>
+				<p>Please select User Type:</p>
+				<input type="radio" id="user1" name="usr" value="1">
+				<label for="user1">Doctor</label>
+				<input type="radio" id="user2" name="usr" value="2">
+				<label for="user2">Nurse</label>
+				<button type="submit">Register</button>
+			</div>
+		</form>
+		<center><h4>Already have login <a href="{% url 'sign_in' %}"> Sign in</a></h4></center>
+	</div>
+</div>

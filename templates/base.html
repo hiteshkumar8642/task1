@@ -1,0 +1,34 @@
+{% load static  %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'base.css' %}">
+    {%block head%}
+    {%endblock%}
+    <title>{%block title%}{%endblock%}</title>
+</head>
+<body>
+
+
+<ul class=base-ul>
+    <div>
+        <li style="float:left" class=base-li><a class=base >Dashboard</li>
+    </div>
+    {%if request.user.is_authenticated%}
+
+    <div>
+        <li style="float:right" class=base-li><a class=base href="{% url 'logout' %}">Logout</a></li>
+        {%else%}
+        <li style="float:right" class=base-li><a class=base href="{% url 'sign_in' %}">Sign in/Register</a></li>
+        {%endif%}
+    </div>
+</ul>
+
+{%block content%}
+{%endblock%}
+</body>
+</html>
