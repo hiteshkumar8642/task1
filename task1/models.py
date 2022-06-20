@@ -12,3 +12,12 @@ class User_Detail(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
     pic=models.ImageField(null=True,blank=True)
     type=models.CharField(max_length=40)
+
+class Blog(models.Model):
+    title=models.CharField(max_length=40)
+    category=models.CharField(max_length=40)
+    summary=models.CharField(max_length=40)
+    content=models.CharField(max_length=40)
+    pic=models.ImageField(null=True,blank=True)
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    type=models.CharField(max_length=40)

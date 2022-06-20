@@ -1,7 +1,7 @@
 from django.shortcuts import render , redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
-from .models import User_Detail
+from .models import User_Detail,Blog
 # Create your views here.
 def logout(request):
     auth.logout(request)
@@ -19,10 +19,10 @@ def sign_up(request):
         state=request.POST['state']
         pin=request.POST['pin']
         usr=request.POST['usr']
-        if usr==1:
+        if usr=="1":
             type="doctor"
         else:
-            type="nurse"
+            type="patient"
         upload = request.FILES['upload']
         if password2!=password1:
              messages.warning(request, 'Password and confirm password does not match')
@@ -36,6 +36,21 @@ def sign_up(request):
         return redirect('home')
     else:
         return render(request,'sign_up.html')
+def add_blog(request):
+    if request.method=='POST' and 'upload' in request.FILES:
+        user=request.user
+        title=request.POST['title']
+        summary=request.POST['summary']
+        content=request.POST['content']
+        usr=request.POST['usr']
+        upload = request.FILES['upload']
+        category=request.POST['category']
+        blog=Blog(user=user,title=title,content=content,category=category,summary=summary,pic=upload,type=usr)
+        blog.save()
+        print('blog created')
+        return redirect('blog')
+    else:
+        return render(request,'add_blog.html')
 def sign_in(request):
     if request.method=='POST':
         uname=request.POST['uname']
@@ -59,3 +74,28 @@ def home(request):
                     return render(request,'index2.html',{'objs':objs})
         else:
             return redirect('sign_up')
+
+def blog(request):
+        if request.user.is_authenticated:
+            user=request.user
+            ob =User_Detail.objects.filter(user=user)
+            for x in ob:
+                if x.type=="doctor":
+                    objs =Blog.objects.filter(user=x.id)
+                    print(objs.count())
+                    return render(request,'blog.html',{'objs':objs})
+                else:
+                    objs =Blog.objects.filter(type='post')
+                    print(objs.count())
+                    return render(request,'blog1.html',{'objs':objs})
+        else:
+            return redirect('sign_up')
+
+def postadd(request,post_id):
+    if request.method=='GET':
+        objs =Blog.objects.filter(id=post_id)
+        for x in objs:
+            x.type='post'
+        print('added to post')
+        x.save()
+        return redirect('blog')

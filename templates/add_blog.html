@@ -1,0 +1,45 @@
+{% load static  %}
+<link rel="stylesheet" href="{%static 'sign_up.css' %}">
+</center>
+<div class="center1">
+	<div class="box" >
+
+		<ul class="messages" font>
+			<h1 style="color:red;">
+				{% for message in messages %}
+				<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+				{% endfor %}
+			</h1>
+		</ul>
+		<form method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			<div class="container">
+				<label for="Title"><b>Title</b></label>
+				<input type="text" placeholder="Enter title" name="title" required>
+				<label for="summary"><b>Summary</b></label>
+				<input type="text" placeholder="Enter summary" name="summary" required>
+				<label for="content"><b> Content</b></label>
+				<input type="text"  placeholder="Enter content" name="content" required>
+				<label for="category"><b>Categories</b></label>
+				<select name="category" id="category" class="form-control">
+					<option value="Mental Health">Mental Health</option>
+					<option value="Heart Disease">Heart Disease</option>
+					<option value="Covid19">Covid19</option>
+					<option value="Immunization">Immunization</option>
+				</select><br>
+				<label for="upload"><b>Image</b></label>
+				<input type="file" name="upload" required>
+
+
+				<br><br>
+				<p>Please select Blog Type:</p>
+				<input type="radio" id="draft" name="usr" value="draft">
+				<label for="draft">Draft</label>
+				<input type="radio" id="post" name="usr" value="post">
+				<label for="post">Post</label>
+				<button type="submit">Add Blog</button>
+			</div>
+		</form>
+		<center><h4>Back to Blog <a href="{% url 'blog' %}"> Blogs</a></h4></center>
+	</div>
+</div>

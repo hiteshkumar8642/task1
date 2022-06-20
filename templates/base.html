@@ -16,7 +16,8 @@
 
 <ul class=base-ul>
     <div>
-        <li style="float:left" class=base-li><a class=base >Dashboard</li>
+        <li class=base-li><a class=base href="{% url 'home' %}" >Dashboard</li></a>
+        <li class=base-li><a class=base href="{% url 'blog' %}">Blogs</a></li>
     </div>
     {%if request.user.is_authenticated%}
 
